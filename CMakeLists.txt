@@ -11,4 +11,6 @@ CPMAddPackage("gh:gabime/spdlog@1.15.2")
 
 # -- executable --
 add_executable(cmake_cpm main.cpp)
+
+# -- link libraries --
 target_link_libraries(${CMAKE_PROJECT_NAME} spdlog)
