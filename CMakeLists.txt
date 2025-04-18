@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 # add dependencies
 include(cmake/CPM.cmake)
 
-# spdlog
 CPMAddPackage("gh:gabime/spdlog@1.15.2")
 
 # executable
