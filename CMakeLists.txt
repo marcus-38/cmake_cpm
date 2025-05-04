@@ -52,6 +52,8 @@ add_executable(cmake_cpm
         src/main.cpp
         src/lib/Log.cpp
         src/lib/Log.h
+        src/gui/testWindows.cpp
+        src/gui/testWindows.h
 )
 
 # -- target compile features
