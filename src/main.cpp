@@ -1,4 +1,4 @@
-#include <spdlog/spdlog.h>
+#include "lib/Log.h"
 
 #include "imgui.h"
 #include "imgui_impl_sdl3.h"
@@ -11,31 +11,35 @@
 #include <SDL3/SDL_opengl.h>
 #endif
 
+using namespace CoreLogger;
+
 int main() {
-    spdlog::info("Using spdlog to work with messages to the user");
+    // Init Log
+    Log::Init();
+    LOG_CORE_INFO("Using Log class to route logs to spdlog");
 
     // setup SDL
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         spdlog::error("SDL_Init(): ", SDL_GetError());
         return -1;
     }
-    spdlog::info("SDL_Init() successful");
+    LOG_CORE_INFO("SDL_Init() successful");
 
     // create a window with SDL_Renderer graphics context
     constexpr Uint32 windowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN;
     SDL_Window *window = SDL_CreateWindow("Change my name", 1280, 720, windowFlags);
     if (window == nullptr) {
-        spdlog::error("SDL_CreateWindow(): ", SDL_GetError());
+        LOG_CORE_ERROR("SDL_CreateWindow(): ", SDL_GetError());
         return -1;
     }
-    spdlog::info("SDL_CreateWindow() successful");
+    LOG_CORE_INFO("SDL_CreateWindow() successful");
     SDL_Renderer *renderer = SDL_CreateRenderer(window, nullptr);
     SDL_SetRenderVSync(renderer, 1);
     if (renderer == nullptr) {
-        spdlog::error("SDL_CreateRenderer(): ", SDL_GetError());
+        LOG_CORE_ERROR("SDL_CreateRenderer(): ", SDL_GetError());
         return -1;
     }
-    spdlog::info("SDL_CreateRenderer() successful");
+    LOG_CORE_INFO("SDL_CreateRenderer() successful");
     SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
     SDL_ShowWindow(window);
 
@@ -67,11 +71,11 @@ int main() {
         while (SDL_PollEvent(&event)) {
             ImGui_ImplSDL3_ProcessEvent(&event);
             if (event.type == SDL_EVENT_QUIT) {
-                spdlog::info("Detected quit event");
+                LOG_CORE_INFO("Detected quit event");
                 done = true;
             }
             if (event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
-                spdlog::info("Detected close event");
+                LOG_CORE_INFO("Detected close event");
                 done = true;
             }
         }
@@ -135,7 +139,7 @@ int main() {
         // Update and Render additional Platform Windows
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
-            spdlog::info("Detected ViewportsEnable");
+            LOG_CORE_INFO("Detected ViewportsEnable");
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
         }

@@ -47,9 +47,12 @@ endif()
 CPMAddPackage("gh:libsdl-org/SDL_image#d345579")
 list(APPEND LIBS SDL3_image::SDL3_image)
 
-
 # -- executable --
-add_executable(cmake_cpm main.cpp)
+add_executable(cmake_cpm
+        src/main.cpp
+        src/lib/Log.cpp
+        src/lib/Log.h
+)
 
 # -- target compile features
 target_compile_features(cmake_cpm PRIVATE cxx_std_23)
