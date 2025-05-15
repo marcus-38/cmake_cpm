@@ -1,7 +1,7 @@
 My cmake template that uses CPM as package management. Implemented Spdlog, SDL3 and ImGui. Will change to Vulkan soon...
 
 
-# .zprofile
+## .zprofile
 ```
 # vulkan setup
 export VULKAN_ROOT_LOCATION="$HOME/VulkanSDK/"
